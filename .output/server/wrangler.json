@@ -1,0 +1,32 @@
+{
+  "compatibility_date": "2026-09-18",
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lumen-english-learning",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "main": "index.mjs",
+  "observability": {
+    "enabled": true
+  },
+  "hyperdrive": [
+    {
+      "binding": "HYPERDRIVE",
+      "id": "f86982cd6e1b4f1db3152887b3b643d7"
+    }
+  ],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "..\\public"
+  },
+  "no_bundle": true,
+  "rules": [
+    {
+      "type": "ESModule",
+      "globs": [
+        "**/*.mjs",
+        "**/*.js"
+      ]
+    }
+  ]
+}
