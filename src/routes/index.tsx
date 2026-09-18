@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { BackgroundPixelStars } from "@/components/ui/background-pixel-stars";
 import { AppHeader } from "@/components/app-header";
 import { Testimonial } from "@/components/ui/design-testimonial";
@@ -7,7 +7,7 @@ import type { Word, DeckId } from "@/lib/words/types";
 import { loadProgress, toggleLearned, ensureCheckin, streak, loadLang, saveLang } from "@/lib/progress";
 import { copy, type Lang } from "@/lib/i18n";
 import { todayIso } from "@/lib/utils";
-import { BookOpen, Code2, CalendarDays, ChevronRight, Volume2, CheckCircle2, Flame, Bot } from "lucide-react";
+import { BookOpen, Code2, CalendarDays, ChevronRight, Volume2, CheckCircle2, Flame, Bot, MessageSquare } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export const Route = createFileRoute("/")({ component: Home });
@@ -81,7 +81,7 @@ function Home() {
               <h3 className="text-lg font-semibold text-fg mb-1">Connect with Telegram Bot</h3>
               <p className="text-sm text-muted mb-4">Get daily vocabulary delivered to your Telegram. Practice anywhere, anytime.</p>
               <a 
-                href="https://t.me/YOUR_BOT_NAME" 
+                href="https://t.me/LumenEnglishBot" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent/15 text-accent border border-accent/30 hover:bg-accent/25 transition-all text-sm font-medium"

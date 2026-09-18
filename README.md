@@ -19,6 +19,8 @@ A fully vibe-coded bilingual (English/Persian) vocabulary learning platform with
 
 - **Modern UI**: Beautiful glassmorphism design with animated starfield background
 
+- **Testimonials Section**: See what our community members say about their learning journey
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -51,6 +53,8 @@ TELEGRAM_BOT_TOKEN=your_bot_token_here
 3. Follow the prompts to create your bot
 4. Copy the API token provided by BotFather
 5. Paste it in your `.env` file as `TELEGRAM_BOT_TOKEN`
+
+> **Note**: The token is loaded from the `TELEGRAM_BOT_TOKEN` environment variable in the webhook handler at `/src/routes/api/telegram/webhook.ts`.
 
 ## 📱 Telegram Bot Setup
 
@@ -86,13 +90,15 @@ After getting your bot token:
 ```
 src/
 ├── components/       # React components
-│   └── ui/          # Reusable UI components
+│   └── ui/          # Reusable UI components (including Testimonial)
 ├── lib/             # Utility functions and business logic
 │   ├── words/       # Word data and utilities
 │   ├── telegram/    # Telegram bot handler
 │   └── auth/        # Authentication logic
 ├── routes/          # Page routes
 │   ├── api/         # API endpoints
+│   │   └── telegram/
+│   │       └── webhook.ts  # Telegram webhook handler (uses TELEGRAM_BOT_TOKEN)
 │   └── ...          # Page components
 ```
 
@@ -118,6 +124,20 @@ The app is designed to be deployed on any platform that supports Node.js:
 - Fly.io
 
 Make sure to set the `TELEGRAM_BOT_TOKEN` environment variable in your deployment platform.
+
+## 🔑 Where to Put Your Telegram Token
+
+Your Telegram bot token should be placed in one of these locations:
+
+1. **Development**: Add it to your `.env` file:
+   ```
+   TELEGRAM_BOT_TOKEN=8909857697:AAF3yva4IFrlEHxF8uO_gVbfk07cyR4ZcYs
+   ```
+
+2. **Production**: Set it as an environment variable in your hosting platform
+
+The token is accessed in the codebase at:
+- `/src/routes/api/telegram/webhook.ts` line 15: `const token = process.env.TELEGRAM_BOT_TOKEN;`
 
 ## 📝 License
 
