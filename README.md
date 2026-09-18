@@ -116,14 +116,50 @@ npm run format       # Format code with Prettier
 
 ## 🌐 Deployment
 
-The app is designed to be deployed on any platform that supports Node.js:
+### Cloudflare Pages/Workers Deployment
 
-- Vercel
-- Railway
-- Render
-- Fly.io
+This project is configured for **Cloudflare** deployment. Follow these steps:
 
-Make sure to set the `TELEGRAM_BOT_TOKEN` environment variable in your deployment platform.
+#### Prerequisites
+1. Install Wrangler CLI globally:
+   ```bash
+   npm install -g wrangler
+   ```
+
+2. Authenticate with Cloudflare:
+   ```bash
+   wrangler login
+   ```
+
+3. Ensure your `.env` file contains all required environment variables (see Environment Variables section)
+
+#### Deploy to Cloudflare
+```bash
+# Build and deploy in one command
+npm run deploy
+
+# Or step by step:
+npm run build        # Build the project
+npx wrangler deploy  # Deploy to Cloudflare
+```
+
+#### Development Preview
+```bash
+npm run dev  # Start local development server
+```
+
+#### Generate Cloudflare Types (optional)
+```bash
+npm run cf-typegen
+```
+
+### Database Migrations
+For Cloudflare deployments, run migrations separately before deploying:
+```bash
+npm run db:migrate
+```
+
+Make sure to set the `TELEGRAM_BOT_TOKEN` environment variable in your Cloudflare dashboard or via Wrangler.
 
 ## 🔑 Where to Put Your Telegram Token
 
