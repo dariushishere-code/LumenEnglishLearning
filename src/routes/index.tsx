@@ -1,13 +1,14 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { BackgroundPixelStars } from "@/components/ui/background-pixel-stars";
 import { AppHeader } from "@/components/app-header";
+import { Testimonial } from "@/components/ui/design-testimonial";
 import { wordOfDay, posLabel } from "@/lib/words/index";
 import type { Word, DeckId } from "@/lib/words/types";
 import { loadProgress, toggleLearned, ensureCheckin, streak, loadLang, saveLang } from "@/lib/progress";
 import { copy, type Lang } from "@/lib/i18n";
 import { todayIso } from "@/lib/utils";
-import { BookOpen, Code2, CalendarDays, MessageSquare, ChevronRight, Volume2, CheckCircle2, Flame } from "lucide-react";
+import { BookOpen, Code2, CalendarDays, ChevronRight, Volume2, CheckCircle2, Flame, Bot } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export const Route = createFileRoute("/")({ component: Home });
 
@@ -32,8 +33,9 @@ function Home() {
     <div className={`relative min-h-dvh bg-bg dither-grid overflow-x-hidden${isRtl ? " rtl" : ""}`}>
       <div className="absolute inset-0 pointer-events-none"><BackgroundPixelStars /></div>
       <AppHeader lang={lang} onToggleLang={() => { const n: Lang = lang === "en" ? "fa" : "en"; setLang(n); saveLang(n); }} />
-      <main className="relative z-10 max-w-5xl mx-auto px-5 pt-8 pb-20 stagger-in">
-        <div className="flex items-center gap-6 mb-10 flex-wrap">
+      <main className="relative z-10 max-w-5xl mx-auto px-5 pt-8 pb-10 stagger-in">
+        {/* Hero Stats */}
+        <div className="flex items-center gap-6 mb-8 flex-wrap">
           <div className="flex items-center gap-2 text-sm">
             <Flame size={15} className="text-warn" />
             <span className="text-warn font-semibold">{currentStreak}</span>
@@ -50,18 +52,49 @@ function Home() {
             {todayChecked ? t.checked : t.checkIn}
           </button>
         </div>
-        <h1 className="text-3xl font-semibold text-fg mb-2">{t.wordOfDay}</h1>
-        <p className="text-muted mb-8">{t.tagline}</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
-          <WordCard word={dailyWord} deck="daily" lang={lang} label={t.daily} progress={progress} setProgress={setProgress} />
-          <WordCard word={codeWord} deck="code" lang={lang} label={t.code} progress={progress} setProgress={setProgress} />
+
+        {/* Word of the Day Cards */}
+        <div className="mb-10">
+          <h1 className="text-3xl font-semibold text-fg mb-2">{t.wordOfDay}</h1>
+          <p className="text-muted mb-6">{t.tagline}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <WordCard word={dailyWord} deck="daily" lang={lang} label={t.daily} progress={progress} setProgress={setProgress} />
+            <WordCard word={codeWord} deck="code" lang={lang} label={t.code} progress={progress} setProgress={setProgress} />
+          </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+        {/* Navigation Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
           <NavCard to="/daily" icon={<BookOpen size={20} />} title={t.daily} lead={t.dailyLead} accent="accent" />
           <NavCard to="/code" icon={<Code2 size={20} />} title={t.code} lead={t.codeLead} accent="ok" />
           <NavCard to="/calendar" icon={<CalendarDays size={20} />} title={t.calendar} lead={t.calendarLead} accent="warn" />
-          <NavCard to="/chat" icon={<MessageSquare size={20} />} title={t.chat} lead={t.chatLead} accent="accent" />
+          <NavCard to="/bot" icon={<Bot size={20} />} title={t.bot} lead={t.botIntro} accent="accent" />
         </div>
+
+        {/* Telegram Bot CTA */}
+        <div className="glass rounded-xl p-6 mb-10">
+          <div className="flex items-start gap-4">
+            <div className="p-3 rounded-lg bg-accent/15 text-accent">
+              <Bot size={24} />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-fg mb-1">Connect with Telegram Bot</h3>
+              <p className="text-sm text-muted mb-4">Get daily vocabulary delivered to your Telegram. Practice anywhere, anytime.</p>
+              <a 
+                href="https://t.me/YOUR_BOT_NAME" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent/15 text-accent border border-accent/30 hover:bg-accent/25 transition-all text-sm font-medium"
+              >
+                <Bot size={16} />
+                Open in Telegram
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Testimonials Section */}
+        <Testimonial />
       </main>
       <footer className="relative z-10 text-center text-xs text-subtle pb-8 px-5">{t.footer}</footer>
     </div>
