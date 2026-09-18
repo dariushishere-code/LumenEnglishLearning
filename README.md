@@ -123,23 +123,7 @@ The app is designed to be deployed on any platform that supports Node.js:
 - Render
 - Fly.io
 
-Make sure to set the `TELEGRAM_BOT_TOKEN` environment variable in your deployment platform.
 
-## 🔑 Where to Put Your Telegram Token
-
-Your Telegram bot token should be placed in one of these locations:
-
-1. **Development**: Add it to your `.env` file:
-   ```
-   TELEGRAM_BOT_TOKEN=8909857697:AAF3yva4IFrlEHxF8uO_gVbfk07cyR4ZcYs
-   ```
-
-2. **Production**: Set it as an environment variable in your hosting platform
-
-The token is accessed in the codebase at:
-- `/src/routes/api/telegram/webhook.ts` line 15: `const token = process.env.TELEGRAM_BOT_TOKEN;`
-
-## 📝 License
 
 MIT
 
