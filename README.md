@@ -116,66 +116,14 @@ npm run format       # Format code with Prettier
 
 ## 🌐 Deployment
 
-### Cloudflare Pages/Workers Deployment
+The app is designed to be deployed on any platform that supports Node.js:
 
-This project is configured for **Cloudflare** deployment. Follow these steps:
+- Vercel
+- Railway
+- Render
+- Fly.io
 
-#### Prerequisites
-1. Install Wrangler CLI globally:
-   ```bash
-   npm install -g wrangler
-   ```
 
-2. Authenticate with Cloudflare:
-   ```bash
-   wrangler login
-   ```
-
-3. Ensure your `.env` file contains all required environment variables (see Environment Variables section)
-
-#### Deploy to Cloudflare
-```bash
-# Build and deploy in one command
-npm run deploy
-
-# Or step by step:
-npm run build        # Build the project
-npx wrangler deploy  # Deploy to Cloudflare
-```
-
-#### Development Preview
-```bash
-npm run dev  # Start local development server
-```
-
-#### Generate Cloudflare Types (optional)
-```bash
-npm run cf-typegen
-```
-
-### Database Migrations
-For Cloudflare deployments, run migrations separately before deploying:
-```bash
-npm run db:migrate
-```
-
-Make sure to set the `TELEGRAM_BOT_TOKEN` environment variable in your Cloudflare dashboard or via Wrangler.
-
-## 🔑 Where to Put Your Telegram Token
-
-Your Telegram bot token should be placed in one of these locations:
-
-1. **Development**: Add it to your `.env` file:
-   ```
-   TELEGRAM_BOT_TOKEN=8909857697:AAF3yva4IFrlEHxF8uO_gVbfk07cyR4ZcYs
-   ```
-
-2. **Production**: Set it as an environment variable in your hosting platform
-
-The token is accessed in the codebase at:
-- `/src/routes/api/telegram/webhook.ts` line 15: `const token = process.env.TELEGRAM_BOT_TOKEN;`
-
-## 📝 License
 
 MIT
 
